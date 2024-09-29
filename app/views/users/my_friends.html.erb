@@ -1,0 +1,63 @@
+<h1>Friends </h1>
+
+<div class='search-area'>
+    <h4>Search Friends </h4>
+    <%= form_tag search_friend_path, method: :get do%>
+        <div class='form-group row'>
+            <div class='col-sm-9'>
+                <%= text_field_tag :friend, params[:friend], placeholder: "Friend Name", autofocus: true, class: "form-control form-control-lg" %>
+            </div>
+            <div class='col-sm-3'>
+                <%= button_tag type: :submit, class: "btn btn-success" do%>
+                    <%= 'Search'%>
+                <%end%>
+            </div>
+        </div>
+    <%end%>
+</div>
+
+<div>
+<% if @friend%>
+    <div class="card card-header results-block">
+    <strong> Email: <%= @friend.email%></strong>
+    <strong> First Name: <%= @friend.first_name%></strong>
+    <strong> Last Name: <%= @friend.last_name%></strong>
+    
+   <% if current_user.friends.where(id: @friend.id).empty?%>
+    <%= link_to 'Follow Friends', add_friend_path(user: current_user, friend: @friend), 
+            class: "btn btn-xs btn-success", data: { turbo_method: :post }%>
+    <%else%>
+        <span class="badge badge-secondry">
+            You are already Friends with <%= @friend.first_name%>
+        </span>
+    <%end%>
+
+<%end%>
+</div>
+
+
+<div id="results">
+    <% if !@friends.empty?%>
+    <table class="table table-hover table-bordered">
+    
+        <thead>
+            <tr>
+            <th scope="col">Email</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% @friends.each do |friend|%>
+                    <tr>
+                    <th scope="row"><%= friend.email%></th>
+                    <th scope="row"><%= friend.first_name%></th>
+                    <th scope="row"><%= friend.last_name%></th>
+                    <td> <%= link_to 'Stop Following', remove_friend_path(friend), 
+                        class: "btn btn-xs btn-warning", data: { turbo_method: :post, turbo_confirm: 'Are you Sure?' }%></td>
+                <%end%>
+        </tbody>
+    </table>
+    <% end %>
+</div>
