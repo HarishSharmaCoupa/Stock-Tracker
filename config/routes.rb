@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :user_stocks, only: [:create,:destroy]
-  
+  get 'my_friends', to: 'users#my_friends'
+  post 'remove_friend/:id', to: 'users#remove_friend', as: 'remove_friend'
+  get 'search_friend',to: 'users#search_friend'
+  post 'add_friend', to: 'users#add_friend'
   devise_for :users
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     
