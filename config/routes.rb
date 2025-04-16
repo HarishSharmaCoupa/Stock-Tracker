@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   root "welcome#index"
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stock', to: 'stocks#search'
+  get 'ipos/analysis', to: 'ipos#analysis', as: :ipo_analysis
+  resources :ipos, only: [:index, :show]
+  resources :company_metrics, only: [:index]
+  get 'company/analysis', to: 'company_metrics#analysis', as: :company_analysis
 end

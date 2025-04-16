@@ -3,6 +3,14 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"
 gem 'devise'
+gem 'pdf-reader'
+gem 'httparty'
+gem 'pry'
+gem 'nokogiri'
+gem 'capybara'
+gem 'selenium-webdriver'   # Optional: for using Selenium as the driver
+gem 'webdrivers' 
+gem 'kaminari'
 gem 'byebug'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -10,7 +18,10 @@ gem 'sassc-rails'
 gem 'devise-bootstrap-views'
 gem 'iex-ruby-client'
 gem 'finnhub_ruby'
+  gem 'pry-rails'     # Enhances the Rails console
+  gem 'pry-byebug'
 gem 'dotenv-rails'
+gem 'httparty'
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]

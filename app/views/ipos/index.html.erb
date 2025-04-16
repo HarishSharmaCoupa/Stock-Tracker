@@ -1,0 +1,27 @@
+<!-- app/views/ipos/index.html.erb -->
+<div class="container py-5">
+  <h1 class="mb-4">Upcoming IPOs</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @ipos["upcoming"].each do |ipo| %>
+      <div class="col">
+        <div class="card h-100 shadow-sm border-info">
+          <div class="card-body">
+            <h5 class="card-title text-primary"><%= ipo["name"] %></h5>
+            <p class="card-text text-muted">
+              <strong>Status:</strong>
+              <span class="badge bg-warning text-dark"><%= ipo["status"].capitalize %></span><br>
+              <%= ipo["additional_text"] %>
+            </p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <a href="<%= ipo["document_url"] %>" target="_blank" class="btn btn-outline-info w-100">
+              View SEBI Document
+            </a>
+            <%= link_to  "Analysis", ipo_analysis_path(filing_url: ipo["document_url"]), data: { turbo: false } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
